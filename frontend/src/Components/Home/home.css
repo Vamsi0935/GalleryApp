@@ -1,0 +1,51 @@
+.image-gallery {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.image-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.image-card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.image-thumbnail {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.image-info {
+    text-align: center;
+}
+
+.image-info h3 {
+    margin: 5px 0 3px;
+    /* Adjust margins for smaller cards */
+    font-size: 1rem;
+    /* Decrease font size */
+}
+
+.image-info p {
+    color: #777;
+    font-size: 0.875rem;
+    /* Decrease font size */
+}

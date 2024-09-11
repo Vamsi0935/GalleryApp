@@ -1,0 +1,14 @@
+.title {
+    font-family: "Sedgwick Ave", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.addImage-btn {
+    text-decoration: none;
+    color: black;
+}
+
+.addImage-btn:hover {
+    color: white;
+}

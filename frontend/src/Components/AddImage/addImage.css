@@ -1,0 +1,60 @@
+body {
+    background-image: url("https://static.vecteezy.com/system/resources/thumbnails/006/429/746/small/abstract-background-gradient-abstract-modern-background-for-mobile-apps-free-vector.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.image-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 2%;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 25px black;
+}
+
+.form-label {
+    font-weight: bold;
+    color: #333;
+}
+
+.form-control {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+textarea.form-control {
+    resize: none;
+}
+
+.upload-area {
+    border: 2px dashed #ccc;
+    padding: 40px;
+    text-align: center;
+    color: #888;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.upload-area.drag-active {
+    background-color: #f0f0f0;
+    border-color: #999;
+}
+
+.upload-area p {
+    margin: 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+
+.file-input {
+    display: none;
+}
+
+p {
+    color: #555;
+    font-size: 0.95rem;
+}
