@@ -20,12 +20,6 @@ app.use(
         callback(new Error("Not allowed by CORS"));
       }
     },
-
-    origin: [
-      "http://localhost:3000, https://gallery-app-frontend-smoky.vercel.app",
-    ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
   })
 );
 
