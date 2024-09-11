@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -8,31 +8,10 @@ const AddImage = () => {
   const [imageName, setImageName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
-  // eslint-disable-next-line no-unused-vars
-  const [imageList, setImageList] = useState([]);
   const [dragActive, setDragActive] = useState(false);
 
   const inputRef = useRef(null);
   const navigate = useNavigate();
-
-  const fetchImageList = async () => {
-    try {
-      const response = await axios.get(
-        "https://gallery-app-api.vercel.app/api/images/"
-      );
-
-      setImageList(response.data.images || []);
-    } catch (error) {
-      console.error("Error fetching image list", error);
-      Swal.fire({
-        title: "Error!",
-        text: "There was an error fetching the image list.",
-        icon: "error",
-        confirmButtonText: "OK",
-      });
-      setImageList([]);
-    }
-  };
 
   const handleDrag = (e) => {
     e.preventDefault();
@@ -85,7 +64,7 @@ const AddImage = () => {
 
     try {
       const response = await axios.post(
-        "https://gallery-app-api.vercel.app/api/images/upload",
+        "http://localhost:5000/api/images/upload",
         formData,
         {
           headers: {
@@ -101,7 +80,6 @@ const AddImage = () => {
       });
 
       console.log(response.data);
-      fetchImageList();
 
       setImageName("");
       setDescription("");
@@ -119,10 +97,6 @@ const AddImage = () => {
       console.error("Error uploading image:", error);
     }
   };
-
-  useEffect(() => {
-    fetchImageList();
-  }, []);
 
   return (
     <>

@@ -1,28 +1,21 @@
 const Image = require("../model/image.model");
-const path = require("path");
 
 // Controller to handle image upload
 exports.uploadImage = (req, res) => {
-  const { imageName, description } = req.body;
+  const { imageName, description, imageUrl } = req.body;
 
-  // Check if file and required fields are provided
-  if (!req.file || !imageName || !description) {
-    return res.status(400).json({
-      message: "Image, name, and description are required",
-    });
+  if (!imageName || !description || !imageUrl) {
+    return res
+      .status(400)
+      .json({ message: "Image name, description, and image URL are required" });
   }
 
-  // Create the image URL based on the uploaded file path
-  const imageUrl = `/uploads/${req.file.filename}`;
-
-  // Create a new image document
   const newImage = new Image({
     imageName,
     description,
     imageUrl,
   });
 
-  // Save the image document to the database
   newImage
     .save()
     .then((image) => {
@@ -38,7 +31,9 @@ exports.uploadImage = (req, res) => {
       });
     });
 };
-exports.getImages = (req, res) => { 
+
+// Controller to fetch all images
+exports.getImages = (req, res) => {
   Image.find()
     .then((images) => {
       res.status(200).json({
@@ -49,6 +44,25 @@ exports.getImages = (req, res) => {
     .catch((err) => {
       res.status(500).json({
         error: "Error fetching images from database",
+        details: err,
+      });
+    });
+};
+
+// Controller to get a single image by ID
+exports.getImageById = (req, res) => {
+  const imageId = req.params.id;
+
+  Image.findById(imageId)
+    .then((image) => {
+      if (!image) {
+        return res.status(404).json({ message: "Image not found" });
+      }
+      res.status(200).json(image);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: "Error fetching image from database",
         details: err,
       });
     });

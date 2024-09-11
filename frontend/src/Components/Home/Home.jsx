@@ -7,9 +7,7 @@ const Home = () => {
 
   const fetchImages = async () => {
     try {
-      const response = await axios.get(
-        "https://gallery-app-api.vercel.app/api/images/"
-      );
+      const response = await axios.get("http://localhost:5000/api/images/");
       setImages(response.data.images || []);
     } catch (error) {
       console.error("Error fetching images", error);
@@ -28,7 +26,7 @@ const Home = () => {
           {images.map((image, index) => (
             <div key={index} className="image-card">
               <img
-                src={`https://gallery-app-api.vercel.app/${image.imageUrl}`}
+                src={`http://localhost:5000${image.imageUrl}`}
                 alt={image.imageName}
                 className="image-thumbnail"
               />
