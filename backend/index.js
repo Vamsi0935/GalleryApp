@@ -20,8 +20,8 @@ app.use(
         callback(new Error("Not allowed by CORS"));
       }
     },
-    methods: ["GET", "POST", "PUT", "DELETE"], // Add methods if needed
-    allowedHeaders: ["Content-Type", "Authorization"], // Add headers if needed
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"], 
   })
 );
 
