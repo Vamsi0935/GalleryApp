@@ -2,15 +2,15 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const cors = require("cors");
+
 const app = express();
 
-app.use(express.json());
+// CORS configuration
 const allowedOrigins = [
   "https://gallery-app-frontend-smoky.vercel.app",
   "http://localhost:3000",
 ];
 
-// CORS configuration
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -20,8 +20,14 @@ app.use(
         callback(new Error("Not allowed by CORS"));
       }
     },
+    methods: ["GET", "POST", "PUT", "DELETE"], // Add methods if needed
+    allowedHeaders: ["Content-Type", "Authorization"], // Add headers if needed
   })
 );
+
+// Middleware
+app.use(express.json());
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 mongoose
   .connect(
@@ -30,12 +36,10 @@ mongoose
   .then(() => console.log("MongoDB connected..."))
   .catch((err) => console.log(err));
 
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
 // Routes
 const imageRoutes = require("./routes/image.route");
 app.use("/api/images", imageRoutes);
 
 app.listen(5000, () => {
-  console.log("Server running...");
+  console.log("Server running on port 5000...");
 });
