@@ -1,6 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios"; 
+import axios from "axios";
 import Swal from "sweetalert2";
 import "./addImage.css";
 
@@ -17,7 +17,9 @@ const AddImage = () => {
 
   const fetchImageList = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/images/");
+      const response = await axios.get(
+        "https://gallery-app-api.vercel.app/api/images/"
+      );
       setImageList(response.data.images || []);
     } catch (error) {
       console.error("Error fetching image list", error);
@@ -82,7 +84,7 @@ const AddImage = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/images/upload",
+        "https://gallery-app-api.vercel.app/api/images/upload",
         formData,
         {
           headers: {
@@ -97,25 +99,27 @@ const AddImage = () => {
         text: "Your image has been uploaded successfully!",
       });
 
-      console.log(response.data); 
+      console.log(response.data);
       fetchImageList();
 
       setImageName("");
       setDescription("");
       setImage(null);
 
-      navigate("/"); 
+      navigate("/");
     } catch (error) {
       Swal.fire({
         icon: "error",
         title: "Upload Failed",
-        text: "There was an error uploading your image.",
+        text: `There was an error uploading your image: ${
+          error.response ? error.response.data.error : error.message
+        }`,
       });
       console.error("Error uploading image:", error);
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchImageList();
   }, []);
 
