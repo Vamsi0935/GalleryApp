@@ -7,7 +7,6 @@ const app = express();
 
 // CORS configuration
 const allowedOrigins = [
-  "https://gallery-app-frontend-smoky.vercel.app",
   "http://localhost:3000",
 ];
 

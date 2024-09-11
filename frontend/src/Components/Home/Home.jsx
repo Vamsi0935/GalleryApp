@@ -4,13 +4,16 @@ import "./home.css";
 
 const Home = () => {
   const [images, setImages] = useState([]);
+  const [error, setError] = useState(null);
 
   const fetchImages = async () => {
     try {
       const response = await axios.get("http://localhost:5000/api/images/");
+      console.log("Fetched images:", response.data.images);
       setImages(response.data.images || []);
     } catch (error) {
       console.error("Error fetching images", error);
+      setError("Failed to load images. Please try again later.");
     }
   };
 
@@ -21,6 +24,7 @@ const Home = () => {
   return (
     <div className="image-gallery">
       <h1 className="display-5 text-center">Our Gallery</h1>
+      {error && <p className="text-center text-danger">{error}</p>}
       {images.length > 0 ? (
         <div className="image-grid">
           {images.map((image, index) => (
@@ -38,7 +42,7 @@ const Home = () => {
           ))}
         </div>
       ) : (
-        <p className="text-center">No images uploaded yet.</p>
+        !error && <p className="text-center">No images uploaded yet.</p>
       )}
     </div>
   );

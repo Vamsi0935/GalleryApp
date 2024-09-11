@@ -1,37 +1,37 @@
 const Image = require("../model/image.model");
 
-// Controller to handle image upload
-exports.uploadImage = (req, res) => {
-  const { imageName, description, imageUrl } = req.body;
+exports.uploadImage = async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: "No file uploaded" });
+    }
 
-  if (!imageName || !description || !imageUrl) {
-    return res
-      .status(400)
-      .json({ message: "Image name, description, and image URL are required" });
-  }
+    const { imageName, description, imageUrl } = req.body;
 
-  const newImage = new Image({
-    imageName,
-    description,
-    imageUrl,
-  });
+    if (!imageName || !description || imageUrl) {
+      return res
+        .status(400)
+        .json({ error: "Image name and description are required" });
+    }
 
-  newImage
-    .save()
-    .then((image) => {
-      res.status(201).json({
-        message: "Image uploaded successfully",
-        image: image,
-      });
-    })
-    .catch((err) => {
-      res.status(500).json({
-        error: "Error saving image to database",
-        details: err,
-      });
+    const newImage = new Image({
+      imageName,
+      description,
+      // imagePath: req.file.path,
+      imageUrl: req.file.path.replace("uploads/", ""),
+      createdAt: new Date(),
     });
-};
 
+    await newImage.save();
+
+    res
+      .status(201)
+      .json({ message: "Image uploaded successfully", data: newImage });
+  } catch (error) {
+    console.error("Error uploading image:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
 // Controller to fetch all images
 exports.getImages = (req, res) => {
   Image.find()
@@ -44,25 +44,6 @@ exports.getImages = (req, res) => {
     .catch((err) => {
       res.status(500).json({
         error: "Error fetching images from database",
-        details: err,
-      });
-    });
-};
-
-// Controller to get a single image by ID
-exports.getImageById = (req, res) => {
-  const imageId = req.params.id;
-
-  Image.findById(imageId)
-    .then((image) => {
-      if (!image) {
-        return res.status(404).json({ message: "Image not found" });
-      }
-      res.status(200).json(image);
-    })
-    .catch((err) => {
-      res.status(500).json({
-        error: "Error fetching image from database",
         details: err,
       });
     });
