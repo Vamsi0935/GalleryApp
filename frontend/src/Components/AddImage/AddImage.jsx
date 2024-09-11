@@ -64,7 +64,7 @@ const AddImage = () => {
 
     try {
       const response = await axios.post(
-        "https://localhost:5000/api/images/upload",
+        "http://localhost:5000/api/images/upload",
         formData,
         {
           headers: {
