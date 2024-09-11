@@ -2,12 +2,13 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const cors = require("cors");
+const multer = require("multer");
 
 const app = express();
 
-// CORS configuration
 const allowedOrigins = [
   "http://localhost:3000",
+  "https://gallery-app-frontend-smoky.vercel.app",
 ];
 
 app.use(
@@ -20,11 +21,10 @@ app.use(
       }
     },
     methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type", "Authorization"], 
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
-// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));

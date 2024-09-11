@@ -8,7 +8,7 @@ const AddImage = () => {
   const [imageName, setImageName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
-  const [imagePreview, setImagePreview] = useState(null); // For preview
+  const [imagePreview, setImagePreview] = useState(null);
   const [dragActive, setDragActive] = useState(false);
 
   const inputRef = useRef(null);
@@ -32,7 +32,7 @@ const AddImage = () => {
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       const droppedImage = e.dataTransfer.files[0];
       setImage(droppedImage);
-      setImagePreview(URL.createObjectURL(droppedImage)); // Generate preview
+      setImagePreview(URL.createObjectURL(droppedImage));
     }
   };
 
@@ -40,7 +40,7 @@ const AddImage = () => {
     if (e.target.files && e.target.files[0]) {
       const selectedImage = e.target.files[0];
       setImage(selectedImage);
-      setImagePreview(URL.createObjectURL(selectedImage)); // Generate preview
+      setImagePreview(URL.createObjectURL(selectedImage));
     }
   };
 
@@ -87,7 +87,7 @@ const AddImage = () => {
       setImageName("");
       setDescription("");
       setImage(null);
-      setImagePreview(null); // Clear preview
+      setImagePreview(null);
 
       navigate("/");
     } catch (error) {
@@ -148,7 +148,7 @@ const AddImage = () => {
                 <img
                   src={imagePreview}
                   alt="Preview"
-                  className="image-preview"                
+                  className="image-preview"
                 />
               </div>
             ) : (

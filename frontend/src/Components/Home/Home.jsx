@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./home.css";
+import Carousel from "../Carousel/Carousel";
 
 const Home = () => {
   const [images, setImages] = useState([]);
@@ -23,6 +24,7 @@ const Home = () => {
 
   return (
     <>
+      <Carousel />
       <div className="image-gallery">
         <h1 className="display-5 text-center">Our Gallery</h1>
         {error && <p className="text-center text-danger">{error}</p>}

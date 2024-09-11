@@ -6,9 +6,9 @@ exports.uploadImage = async (req, res) => {
       return res.status(400).json({ error: "No file uploaded" });
     }
 
-    const { imageName, description, imageUrl } = req.body;
+    const { imageName, description } = req.body;
 
-    if (!imageName || !description || imageUrl) {
+    if (!imageName || !description) {
       return res
         .status(400)
         .json({ error: "Image name and description are required" });
@@ -17,7 +17,6 @@ exports.uploadImage = async (req, res) => {
     const newImage = new Image({
       imageName,
       description,
-      // imagePath: req.file.path,
       imageUrl: req.file.path.replace("uploads/", ""),
       createdAt: new Date(),
     });
@@ -32,7 +31,7 @@ exports.uploadImage = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-// Controller to fetch all images
+
 exports.getImages = (req, res) => {
   Image.find()
     .then((images) => {
