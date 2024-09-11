@@ -58,3 +58,11 @@ p {
     color: #555;
     font-size: 0.95rem;
 }
+
+.image-preview {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid black;
+}

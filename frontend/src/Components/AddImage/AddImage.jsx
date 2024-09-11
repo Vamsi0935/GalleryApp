@@ -8,6 +8,7 @@ const AddImage = () => {
   const [imageName, setImageName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null); // For preview
   const [dragActive, setDragActive] = useState(false);
 
   const inputRef = useRef(null);
@@ -31,6 +32,7 @@ const AddImage = () => {
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       const droppedImage = e.dataTransfer.files[0];
       setImage(droppedImage);
+      setImagePreview(URL.createObjectURL(droppedImage)); // Generate preview
     }
   };
 
@@ -38,6 +40,7 @@ const AddImage = () => {
     if (e.target.files && e.target.files[0]) {
       const selectedImage = e.target.files[0];
       setImage(selectedImage);
+      setImagePreview(URL.createObjectURL(selectedImage)); // Generate preview
     }
   };
 
@@ -84,6 +87,7 @@ const AddImage = () => {
       setImageName("");
       setDescription("");
       setImage(null);
+      setImagePreview(null); // Clear preview
 
       navigate("/");
     } catch (error) {
@@ -139,9 +143,13 @@ const AddImage = () => {
             onDrop={handleDrop}
             onClick={handleClick}
           >
-            {image ? (
+            {imagePreview ? (
               <div>
-                <p>Image: {image.name}</p>
+                <img
+                  src={imagePreview}
+                  alt="Preview"
+                  className="image-preview"                
+                />
               </div>
             ) : (
               <p>Drag & drop an image here, or click to select one</p>

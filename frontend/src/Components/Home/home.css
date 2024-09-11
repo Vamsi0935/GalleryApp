@@ -1,51 +1,75 @@
 .image-gallery {
     padding: 20px;
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2rem;
 }
 
 .image-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    margin-top: 30px;
+    grid-gap: 20px;
 }
 
 .image-card {
-    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 10px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
-    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: transform 0.3s ease-in-out;
 }
 
 .image-card:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
 }
 
 .image-thumbnail {
     width: 100%;
     height: 300px;
     object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 10px;
+    border-radius: 4px;
 }
 
 .image-info {
     text-align: center;
+    padding-top: 10px;
 }
 
 .image-info h3 {
-    margin: 5px 0 3px;
-    /* Adjust margins for smaller cards */
-    font-size: 1rem;
-    /* Decrease font size */
+    font-size: 1.25rem;
+    margin-bottom: 8px;
 }
 
 .image-info p {
-    color: #777;
-    font-size: 0.875rem;
-    /* Decrease font size */
+    font-size: 1rem;
+    color: #666;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-danger {
+    color: #dc3545;
+}
+
+/* Media query for better responsiveness on smaller screens */
+@media (max-width: 768px) {
+    .image-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        /* Smaller images on small screens */
+    }
+
+    .image-thumbnail {
+        height: 120px;
+        /* Adjust thumbnail height for small screens */
+    }
 }
