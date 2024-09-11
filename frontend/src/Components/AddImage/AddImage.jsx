@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "axios"; 
 import Swal from "sweetalert2";
 import "./addImage.css";
 
@@ -17,7 +17,7 @@ const AddImage = () => {
 
   const fetchImageList = async () => {
     try {
-      const response = await axios.get("https://gallery-app-api.vercel.app/api/images/");
+      const response = await axios.get("http://localhost:5000/api/images/");
       setImageList(response.data.images || []);
     } catch (error) {
       console.error("Error fetching image list", error);
@@ -82,7 +82,7 @@ const AddImage = () => {
 
     try {
       const response = await axios.post(
-        "https://gallery-app-api.vercel.app/api/images/upload",
+        "http://localhost:5000/api/images/upload",
         formData,
         {
           headers: {
@@ -97,14 +97,14 @@ const AddImage = () => {
         text: "Your image has been uploaded successfully!",
       });
 
-      console.log(response.data);
+      console.log(response.data); 
       fetchImageList();
 
       setImageName("");
       setDescription("");
       setImage(null);
 
-      navigate("/");
+      navigate("/"); 
     } catch (error) {
       Swal.fire({
         icon: "error",

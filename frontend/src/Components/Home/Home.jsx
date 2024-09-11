@@ -7,7 +7,9 @@ const Home = () => {
 
   const fetchImages = async () => {
     try {
-      const response = await axios.get("https://gallery-app-api.vercel.app/api/images/");
+      const response = await axios.get(
+        "https://gallery-app-api.vercel.app/api/images/"
+      );
       setImages(response.data.images || []);
     } catch (error) {
       console.error("Error fetching images", error);
@@ -38,7 +40,7 @@ const Home = () => {
           ))}
         </div>
       ) : (
-        <p>No images uploaded yet.</p>
+        <p className="text-center">No images uploaded yet.</p>
       )}
     </div>
   );

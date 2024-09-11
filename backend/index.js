@@ -5,10 +5,21 @@ const cors = require("cors");
 const app = express();
 
 app.use(express.json());
+const allowedOrigins = [
+  "https://gallery-app-frontend-smoky.vercel.app",
+  "http://localhost:3000",
+];
+
+// CORS configuration
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
