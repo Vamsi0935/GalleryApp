@@ -20,6 +20,7 @@ const AddImage = () => {
       const response = await axios.get(
         "https://gallery-app-api.vercel.app/api/images/"
       );
+
       setImageList(response.data.images || []);
     } catch (error) {
       console.error("Error fetching image list", error);
