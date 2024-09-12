@@ -33,7 +33,7 @@ const Home = () => {
             {images.map((image, index) => (
               <div key={index} className="image-card">
                 <img
-                  src={`https://gallery-app-api.vercel.app/${image.imageUrl}`}
+                  src={`http://localhost:5000/${image.imageUrl}`}
                   alt={image.imageName || "Untitled"}
                   className="image-thumbnail"
                 />
