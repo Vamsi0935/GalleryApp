@@ -67,7 +67,7 @@ const AddImage = () => {
 
     try {
       const response = await axios.post(
-        "https://gallery-app-api.vercel.app/api/images/upload",
+        "http://localhost:5000/api/images/upload",
         formData,
         {
           headers: {
