@@ -6,7 +6,9 @@ const multer = require("multer");
 
 const app = express();
 
-const allowedOrigins = ["http://localhost:3000","https://gallery-app-frontend-smoky.vercel.app"];
+const allowedOrigins = [
+  "http://localhost:3000",
+];
 
 app.use(
   cors({
