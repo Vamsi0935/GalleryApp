@@ -6,10 +6,4 @@
     "routes": [
       { "src": "/api/(.*)", "dest": "/index.js" }
     ],
-    "rewrites": [
-    {
-      "source": "/uploads/(.*)",
-      "destination": "/api/uploads/$1"
-    }
-  ]
 }
